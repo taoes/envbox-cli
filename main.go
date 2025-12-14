@@ -11,7 +11,7 @@ import (
 
 func main() {
 	utils.ReadConfig()
-	rootCmd := &cobra.Command{Use: "envBox", Short: "🔥 envBox CLI 主程序,致力于开发环境的管理、运行 & 分发"}
+	rootCmd := buildRootCmd()
 
 	findCommand := command.InitFindCommand()
 	installCommand := command.InitInstallCommand()
@@ -31,4 +31,10 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+}
+
+func buildRootCmd() *cobra.Command {
+	rootCmd := &cobra.Command{Use: "envBox", Short: "🔥 envBox CLI 主程序,致力于开发环境的管理、运行 & 分发"}
+
+	return rootCmd
 }

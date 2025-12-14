@@ -12,6 +12,9 @@ func InitUninstallCommand() *cobra.Command {
 		Short: "卸载指定包",
 		Run:   execUninstallCommand,
 	}
+	command.Flags().StringVarP(&name, "name", "n", "", "包名称")
+	command.Flags().StringVarP(&version, "version", "v", "", "包版本")
+	command.MarkFlagRequired("name")
 	return command
 }
 

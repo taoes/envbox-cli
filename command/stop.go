@@ -12,6 +12,9 @@ func InitStopCommand() *cobra.Command {
 		Short: "停止指定服务",
 		Run:   execStopCommand,
 	}
+	command.Flags().StringVarP(&name, "name", "n", "", "包名称")
+	command.Flags().StringVarP(&version, "version", "v", "", "包版本")
+	command.MarkFlagRequired("name")
 	return command
 }
 

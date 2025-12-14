@@ -12,6 +12,9 @@ func InitListCommand() *cobra.Command {
 		Short: "列出已安装的包",
 		Run:   execListCommand,
 	}
+	command.Flags().StringVarP(&name, "name", "n", "", "包名称")
+	command.Flags().StringVarP(&version, "version", "v", "", "包版本")
+	command.MarkFlagRequired("name")
 	return command
 }
 

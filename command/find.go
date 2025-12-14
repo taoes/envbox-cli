@@ -15,10 +15,14 @@ func InitFindCommand() *cobra.Command {
 		Short: "搜索安装包",
 		Run:   execCommand,
 	}
+	command.Flags().StringVarP(&name, "name", "n", "", "包名称")
+	command.Flags().StringVarP(&version, "version", "v", "", "包版本")
+	command.MarkFlagRequired("name")
 	return command
 }
 
 func execCommand(cmd *cobra.Command, args []string) {
+
 	// 从配置中获取注册中心URL
 	config := utils.ReadConfig()
 	registryUrl := config.RegistryUrl
@@ -28,8 +32,9 @@ func execCommand(cmd *cobra.Command, args []string) {
 
 	// 准备查询参数
 	params := make(map[string]string)
-	params["packageName"] = args[0]
-	params["packageVersion"] = args[0]
+	params["packageName"] = name
+	params["packageVersion"] = version
+	fmt.Printf("正在搜索安装包%s,请稍后....\n", name)
 
 	// 发送HTTP GET请求
 	response, err := utils.Get(url, params)
